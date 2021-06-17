@@ -10,10 +10,39 @@ import { getCategoryList } from '../../utils/categories';
 import NewsletterBanner from '../../components/NewsletterBanner';
 import SingleArticleBanner from '../../components/SingleArticleBanner';
 import SingleArticleContent from '../../components/SingleArticleContent';
+import { motion } from 'framer-motion';
+import SingleArticleRelated from '../../components/SingleArticleRelated';
+
+
+const variants = {
+  initial: {
+    y: -10,
+    opacity: 0,
+  },
+  enter: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.35,
+      delay: 0.35,
+      when: 'beforeChildren',
+    },
+  },
+  exit: {
+    y: 150,
+    opacity: 0,
+    transition: { duration: 0.35, when: 'afterChildren' },
+  },
+};
 
 const Article = ({ postData, categoryList, relatedPosts }) => {
   return (
-    <div>
+    <motion.div
+      variants={variants}
+      initial='initial'
+      animate='enter'
+      exit='exit'
+    >
       <Head>
         <title>{postData.title} - paradigm.</title>
       </Head>
@@ -27,12 +56,14 @@ const Article = ({ postData, categoryList, relatedPosts }) => {
         <SingleArticleContent
           author={postData.author.name}
           content={postData.content}
+          date={postData.createdAt}
           category={postData.category}
         />
         <NewsletterBanner />
+        <SingleArticleRelated posts={relatedPosts} />
       </main>
       <Footer />
-    </div>
+    </motion.div>
   );
 };
 
