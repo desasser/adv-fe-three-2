@@ -1,10 +1,12 @@
 import Head from 'next/head';
-
+import Footer from '../../components/Footer';
+import Header from '../../components/Header';
 import {
   getSingleCategory,
   getCategoryList,
   getCategorySlugs,
 } from '../../utils/categories';
+import NewsletterBanner from '../../components/NewsletterBanner';
 
 const Category = ({ title, categoryData, categoryList }) => {
   return (
@@ -12,9 +14,12 @@ const Category = ({ title, categoryData, categoryList }) => {
       <Head>
         <title>{title} - paradigm.</title>
       </Head>
+      <Header categoryList={categoryList} />
       <main>
         <pre>{JSON.stringify(categoryData, null, 2)}</pre>
+        <NewsletterBanner />
       </main>
+      <Footer />
     </div>
   );
 };

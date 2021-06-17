@@ -1,11 +1,13 @@
 import Head from 'next/head';
-
+import Footer from '../../components/Footer';
+import Header from '../../components/Header';
 import {
   getPostSlugs,
   getSinglePost,
   getRelatedPosts,
 } from '../../utils/posts';
 import { getCategoryList } from '../../utils/categories';
+import NewsletterBanner from '../../components/NewsletterBanner';
 
 const Article = ({ postData, categoryList, relatedPosts }) => {
   return (
@@ -13,9 +15,12 @@ const Article = ({ postData, categoryList, relatedPosts }) => {
       <Head>
         <title>{postData.title} - paradigm.</title>
       </Head>
+      <Header categoryList={categoryList} />
       <main>
         <pre>{JSON.stringify(postData, null, 2)}</pre>
+        <NewsletterBanner />
       </main>
+      <Footer />
     </div>
   );
 };
