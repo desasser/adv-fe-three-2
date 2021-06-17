@@ -8,6 +8,8 @@ import {
 } from '../../utils/posts';
 import { getCategoryList } from '../../utils/categories';
 import NewsletterBanner from '../../components/NewsletterBanner';
+import SingleArticleBanner from '../../components/SingleArticleBanner';
+import SingleArticleContent from '../../components/SingleArticleContent';
 
 const Article = ({ postData, categoryList, relatedPosts }) => {
   return (
@@ -17,7 +19,16 @@ const Article = ({ postData, categoryList, relatedPosts }) => {
       </Head>
       <Header categoryList={categoryList} />
       <main>
-        <pre>{JSON.stringify(postData, null, 2)}</pre>
+        <SingleArticleBanner
+          featuredImage={postData.featuredImage}
+          title={postData.title}
+          excerpt={postData.excerpt}
+        />
+        <SingleArticleContent
+          author={postData.author.name}
+          content={postData.content}
+          category={postData.category}
+        />
         <NewsletterBanner />
       </main>
       <Footer />
